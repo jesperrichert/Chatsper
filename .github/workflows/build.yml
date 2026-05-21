@@ -1,0 +1,50 @@
+name: Build Chatsper for Desktop
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chatsper
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build:
+    name: "Build for ${{ matrix.os }}"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - os: windows
+            goos: windows
+            goarch: amd64
+            ext: .exe
+          - os: linux
+            goos: linux
+            goarch: amd64
+            ext: ""
+          - os: macos
+            goos: darwin
+            goarch: amd64
+            ext: ""
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - name: Build
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: |
+          go build -o chatsper-${{ matrix.os }}${{ matrix.ext }} ./...
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: chatsper-${{ matrix.os }}
+          path: chatsper-${{ matrix.os }}${{ matrix.ext }}
