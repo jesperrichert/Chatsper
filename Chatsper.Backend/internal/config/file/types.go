@@ -5,15 +5,15 @@ import (
 )
 
 type Config struct {
-	Bot      Bot      `yaml:"Bot"`
-	Database Database `yaml:"Database"`
-	Version  string   `yaml:"CONFIG_VERSION"`
+	TwitchPlatform TwitchPlatform `yaml:"TwitchPlatform"`
+	Database       Database       `yaml:"Database"`
+	Version        string         `yaml:"CONFIG_VERSION"`
 }
 
-type Bot struct {
-	UserId string `yaml:"UserId"`
-	ID     string `yaml:"ID"`
-	Secret string `yaml:"Secret"`
+type TwitchPlatform struct {
+	ApplicationUserId string `yaml:"ApplicationUserId"`
+	ApplicationID     string `yaml:"ApplicationID"`
+	ApplicationSecret string `yaml:"ApplicationSecret"`
 }
 
 type Database struct {

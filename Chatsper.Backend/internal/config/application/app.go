@@ -1,20 +1,45 @@
 package application
 
 import (
+	"fmt"
+	"os"
+
+	"github.com/gin-gonic/gin"
+	"github.com/pterm/pterm"
+	"gorm.io/gorm"
 	"zip.jespersen.chatsper/Chatsper.Backend/internal/api/controller"
 	"zip.jespersen.chatsper/Chatsper.Backend/internal/api/router"
-	shared "zip.jespersen.chatsper/Chatsper.Backend/shared/application"
+	"zip.jespersen.chatsper/Chatsper.Backend/internal/config/file"
+	"zip.jespersen.chatsper/Chatsper.Backend/internal/platforms/twitch"
+	Log "zip.jespersen.chatsper/Chatsper.Backend/internal/utils"
 )
 
-func (app *shared.Chatsper) Build() {
+type Chatsper struct {
+	Config   *file.Config
+	Database *gorm.DB
+	Api      *gin.Engine
+}
 
-	//Register Controller
-	exampleController := controller.NewExampleController(*app)
+func (app *Chatsper) Build() {
 
-	routeConfig := router.RouterConfig{
-		Chatsper:          *app,
-		ExampleController: exampleController,
+	Log.Info("Adding Controller to API Server...")
+	// Controller
+	exampleController := controller.NewExampleController(app.Config, app.Database, app.Api)
+
+	// Platforms
+	twtich := twitch.NewTwitch(app.Config, app.Api, app.Database)
+	err := twtich.Init()
+	if err != nil {
+		fmt.Println(pterm.Red("Error initializing Twitch"))
+		os.Exit(0)
 	}
 
+	routeConfig := router.RouterConfig{
+		Api:             app.Api,
+		IndexController: exampleController,
+	}
+
+	Log.Info("Running Setup for API Router...")
 	routeConfig.Setup()
+	Log.Info("Loaded API Router for Chatsper")
 }

@@ -3,6 +3,7 @@ package application
 import "github.com/gin-gonic/gin"
 
 func NewGin() *gin.Engine {
-
-	return gin.Default()
+	gin.SetMode(gin.ReleaseMode)
+	engine := gin.Default()
+	return engine
 }

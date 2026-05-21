@@ -3,15 +3,20 @@ package application
 import (
 	"log"
 
+	"github.com/pterm/pterm"
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"zip.jespersen.chatsper/Chatsper.Backend/internal/models"
+	Log "zip.jespersen.chatsper/Chatsper.Backend/internal/utils"
 	shared "zip.jespersen.chatsper/Chatsper.Backend/shared/database"
 )
 
 func NewDatabase(dbType shared.DatabaseType, connectionStr string) *gorm.DB {
 	var database *gorm.DB
+
+	Log.Debug("Connecting to database...")
+	Log.Debug("Load database for type: " + pterm.Magenta(dbType))
 
 	switch dbType {
 	case shared.SqliteDataBase:
@@ -39,8 +44,11 @@ func NewDatabase(dbType shared.DatabaseType, connectionStr string) *gorm.DB {
 }
 
 func migrations(db *gorm.DB) {
-	err := db.AutoMigrate(&models.ExampleEntity{})
+	Log.Message("Running migrations for Database...")
+	err := db.AutoMigrate(
+		&models.ExampleEntity{},
+	)
 	if err != nil {
-		return
+		Log.Error("Database Migrations failed to load for the current connection...", true)
 	}
 }

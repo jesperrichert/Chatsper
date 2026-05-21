@@ -1,30 +1,32 @@
 package file
 
 import (
-	"fmt"
 	"log"
 	"os"
 
 	"github.com/goccy/go-yaml"
 	"github.com/pterm/pterm"
+	Log "zip.jespersen.chatsper/Chatsper.Backend/internal/utils"
 	"zip.jespersen.chatsper/Chatsper.Backend/shared/database"
 )
 
-var Version = "1.0.0"
+var Version = "1.0.1"
 
 func LoadFromFile(file string) (*Config, error) {
+	Log.Info("Loading config from file: " + file)
 	data, err := os.ReadFile(file)
 	if err != nil {
-		fmt.Println("No config file found")
+		Log.Error("No Config found for Chatsper... Please open config.yml and configure your Chatsper.", false)
+		Log.Debug("Then Restart the Bot...")
 
 		template := &Config{
-			Bot: Bot{
-				ID:     "",
-				Secret: "",
-				UserId: "",
+			TwitchPlatform: TwitchPlatform{
+				ApplicationID:     "",
+				ApplicationSecret: "",
+				ApplicationUserId: "",
 			},
 			Database: Database{
-				Type:          database.DatabaseType(0),
+				Type:          database.SqliteDataBase,
 				ConnectionUrl: "postgres://postgres:postgres@localhost:5432/postgres",
 			},
 			Version: Version,
@@ -41,6 +43,7 @@ func LoadFromFile(file string) (*Config, error) {
 		if err != nil {
 			return nil, err
 		}
+		Log.Error("", true)
 	}
 	var config Config
 	err = yaml.Unmarshal(data, &config)

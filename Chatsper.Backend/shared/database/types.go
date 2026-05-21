@@ -1,8 +1,8 @@
 package database
 
 const (
-	SqliteDataBase   DatabaseType = iota // 0
-	PostgresDatabase                     // 1
+	SqliteDataBase   DatabaseType = "SQLITE"   // 0
+	PostgresDatabase DatabaseType = "POSTGRES" // 1
 )
 
-type DatabaseType int
+type DatabaseType string

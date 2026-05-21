@@ -1,14 +1,15 @@
 package router
 
 import (
+	"os"
+
 	"github.com/gin-gonic/gin"
-	shared2 "zip.jespersen.chatsper/Chatsper.Backend/shared/api/controller"
-	shared "zip.jespersen.chatsper/Chatsper.Backend/shared/application"
+	"zip.jespersen.chatsper/Chatsper.Backend/internal/api/controller"
 )
 
 type RouterConfig struct {
-	shared.Chatsper
-	ExampleController *shared2.ExampleController
+	Api             *gin.Engine
+	IndexController *controller.IndexController
 }
 
 func (c *RouterConfig) Setup() {
@@ -16,12 +17,29 @@ func (c *RouterConfig) Setup() {
 		c.Api = gin.Default()
 	}
 
+	// Dashboard
+	c.Api.Static("/assets", os.Getenv("FRONTEND_BUILD")+"/client/assets")
+	c.Api.StaticFile("/", os.Getenv("FRONTEND_BUILD")+"/client/index.html")
+	c.Api.NoRoute(func(c *gin.Context) {
+		c.File(os.Getenv("FRONTEND_BUILD") + "/client/index.html")
+	})
+
+	// API
 	api := c.Api.Group("/api")
 	{
+		api.GET("/", func(context *gin.Context) {
+			context.JSON(200, gin.H{
+				"status":  "ok",
+				"version": "/api/v1",
+				"platforms": gin.H{
+					"twtich": "/platform/twtich",
+				},
+			})
+		})
 		// v1
 		v1 := api.Group("/v1")
 		{
-			v1.GET("/", c.ExampleController.Get)
+			v1.GET("/", c.IndexController.Get)
 		}
 	}
 }
