@@ -1,4 +1,4 @@
-package config
+package file
 
 import (
 	"fmt"
@@ -6,9 +6,11 @@ import (
 	"os"
 
 	"github.com/goccy/go-yaml"
+	"github.com/pterm/pterm"
+	"zip.jespersen.chatsper/Chatsper.Backend/shared/database"
 )
 
-var CONFIG_VERSION = "1.0.0"
+var Version = "1.0.0"
 
 func LoadFromFile(file string) (*Config, error) {
 	data, err := os.ReadFile(file)
@@ -21,7 +23,11 @@ func LoadFromFile(file string) (*Config, error) {
 				Secret: "",
 				UserId: "",
 			},
-			Version: CONFIG_VERSION,
+			Database: Database{
+				Type:          database.DatabaseType(0),
+				ConnectionUrl: "postgres://postgres:postgres@localhost:5432/postgres",
+			},
+			Version: Version,
 		}
 		bytes, err := yaml.Marshal(template)
 		if err != nil {
@@ -39,8 +45,9 @@ func LoadFromFile(file string) (*Config, error) {
 	var config Config
 	err = yaml.Unmarshal(data, &config)
 
-	if CONFIG_VERSION != config.Version {
-		log.Fatal("Config version mismatch. Please backup your config and lets Chatsper regenerate the config!")
+	if Version != config.Version {
+		pterm.DefaultBasicText.Println(pterm.Red("Config version mismatch. ") + "Please" + pterm.LightBlue(" backup ") + "your config and lets" + pterm.LightMagenta(" Chatsper ") + "regenerate the config!")
+		os.Exit(0)
 	}
 
 	if err != nil {
