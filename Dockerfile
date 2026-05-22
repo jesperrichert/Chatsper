@@ -1,6 +1,5 @@
-FROM alpine:3.23.0 AS base
+FROM debian:trixie-slim AS base
 WORKDIR /app
-
 
 FROM oven/bun:1 AS buildfrontend
 WORKDIR /Chatsper.Frontend
@@ -10,7 +9,7 @@ COPY /Chatsper.Frontend/ .
 RUN bun install
 RUN bun run build
 
-FROM golang:tip-alpine3.23 AS buildbackend
+FROM golang:tip-trixie AS buildbackend
 WORKDIR /Chatsper.Backend
 
 COPY /Chatsper.Backend/ .
