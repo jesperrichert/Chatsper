@@ -11,7 +11,7 @@ RUN bun install
 RUN bun run build
 
 FROM golang:tip-alpine3.23 AS buildbackend
-WORKDIR /koop-feedback.Backend
+WORKDIR /Chatsper.Backend
 
 COPY /Chatsper.Backend/ .
 
