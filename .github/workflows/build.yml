@@ -41,7 +41,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
 
       - run: cd ./Chatsper.Frontend && bun i && bun run build
-      - run: sudo apt install gcc-mingw-w64-x86-64 -y
+      # - run: sudo apt install gcc-mingw-w64-x86-64 -y
       - name: Build
         env:
           FRONTEND_BUILD: ./ChatsperFrontend/build
