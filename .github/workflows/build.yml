@@ -11,7 +11,7 @@ env:
 jobs:
   build:
     name: "Build for ${{ matrix.os }}"
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runson }}
     strategy:
       matrix:
         include:
@@ -19,14 +19,17 @@ jobs:
             goos: windows
             goarch: amd64
             ext: .exe
+            runson: windows-latest
           - os: linux
             goos: linux
             goarch: amd64
             ext: ""
+            runson: ubuntu-latest
           - os: macos
             goos: darwin
             goarch: amd64
             ext: ""
+            runson: macos-latest
 
     steps:
       - uses: actions/checkout@v4
