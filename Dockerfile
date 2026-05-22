@@ -15,6 +15,7 @@ WORKDIR /Chatsper.Backend
 
 COPY /Chatsper.Backend/ .
 
+ENV CGO_ENABLED=1
 RUN go build ./cmd/main.go
 
 FROM base AS final
