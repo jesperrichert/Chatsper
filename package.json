@@ -1,9 +1,0 @@
-{
-  "scripts": {
-    "backend": "export FRONTEND_BUILD=./Chatsper.Frontend/build && go run ./Chatsper.Backend/cmd/main.go",
-    "build": "cd ./Chatsper.Frontend && react-router build",
-    "dev": "cd ./Chatsper.Frontend && react-router dev",
-    "start": "cd ./Chatsper.Frontend && react-router-serve ./build/server/index.js",
-    "typecheck": "cd ./Chatsper.Frontend && react-router typegen && tsc"
-  }
-}

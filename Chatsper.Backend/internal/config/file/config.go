@@ -1,13 +1,13 @@
 package file
 
 import (
+	"gopkg.in/yaml.v3"
 	"log"
 	"os"
 
-	"github.com/goccy/go-yaml"
 	"github.com/pterm/pterm"
-	Log "zip.jespersen.chatsper/Chatsper.Backend/internal/utils"
-	"zip.jespersen.chatsper/Chatsper.Backend/shared/database"
+	Log "zip.jespersen.chatsper/internal/utils"
+	"zip.jespersen.chatsper/shared/database"
 )
 
 var Version = "1.0.1"

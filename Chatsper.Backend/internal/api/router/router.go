@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"zip.jespersen.chatsper/Chatsper.Backend/internal/api/controller"
+	"zip.jespersen.chatsper/internal/api/controller"
 )
 
 type RouterConfig struct {

@@ -5,8 +5,8 @@ import (
 	"log"
 
 	"github.com/pterm/pterm"
-	"zip.jespersen.chatsper/Chatsper.Backend/internal/config/application"
-	"zip.jespersen.chatsper/Chatsper.Backend/internal/config/file"
+	"zip.jespersen.chatsper/internal/config/application"
+	"zip.jespersen.chatsper/internal/config/file"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	
 	api := application.NewGin()
 	database := application.NewDatabase(configuration.Database.Type, configuration.Database.ConnectionUrl)
 

@@ -7,11 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/pterm/pterm"
 	"gorm.io/gorm"
-	"zip.jespersen.chatsper/Chatsper.Backend/internal/api/controller"
-	"zip.jespersen.chatsper/Chatsper.Backend/internal/api/router"
-	"zip.jespersen.chatsper/Chatsper.Backend/internal/config/file"
-	"zip.jespersen.chatsper/Chatsper.Backend/internal/platforms/twitch"
-	Log "zip.jespersen.chatsper/Chatsper.Backend/internal/utils"
+	"zip.jespersen.chatsper/internal/api/controller"
+	"zip.jespersen.chatsper/internal/api/router"
+	"zip.jespersen.chatsper/internal/config/file"
+	"zip.jespersen.chatsper/internal/platforms/twitch"
+	Log "zip.jespersen.chatsper/internal/utils"
 )
 
 type Chatsper struct {

@@ -3,8 +3,8 @@ package twitch
 import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
-	"zip.jespersen.chatsper/Chatsper.Backend/internal/config/file"
-	Log "zip.jespersen.chatsper/Chatsper.Backend/internal/utils"
+	"zip.jespersen.chatsper/internal/config/file"
+	Log "zip.jespersen.chatsper/internal/utils"
 )
 
 type Twitch struct {

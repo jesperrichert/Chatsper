@@ -7,9 +7,9 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"zip.jespersen.chatsper/Chatsper.Backend/internal/models"
-	Log "zip.jespersen.chatsper/Chatsper.Backend/internal/utils"
-	shared "zip.jespersen.chatsper/Chatsper.Backend/shared/database"
+	"zip.jespersen.chatsper/internal/models"
+	Log "zip.jespersen.chatsper/internal/utils"
+	shared "zip.jespersen.chatsper/shared/database"
 )
 
 func NewDatabase(dbType shared.DatabaseType, connectionStr string) *gorm.DB {

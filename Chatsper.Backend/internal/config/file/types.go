@@ -1,7 +1,7 @@
 package file
 
 import (
-	"zip.jespersen.chatsper/Chatsper.Backend/shared/database"
+	"zip.jespersen.chatsper/shared/database"
 )
 
 type Config struct {

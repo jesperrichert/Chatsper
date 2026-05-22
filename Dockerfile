@@ -13,8 +13,6 @@ RUN bun run build
 FROM golang:tip-alpine3.23 AS buildbackend
 WORKDIR /koop-feedback.Backend
 
-COPY /go.mod ./go.mod
-COPY /go.sum ./go.sum
 COPY /Chatsper.Backend/ .
 
 RUN go build ./cmd/main.go

@@ -3,7 +3,7 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
-	"zip.jespersen.chatsper/Chatsper.Backend/internal/config/file"
+	"zip.jespersen.chatsper/internal/config/file"
 )
 
 type IndexController struct {
