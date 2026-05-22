@@ -3,9 +3,9 @@ WORKDIR /app
 
 
 FROM oven/bun:1 AS buildfrontend
-WORKDIR /Chatsper.Frondend
+WORKDIR /Chatsper.Frontend
 
-COPY /Chatsper.Frondend/ .
+COPY /Chatsper.Frontend/ .
 
 RUN bun install
 RUN bun run build
@@ -22,6 +22,6 @@ FROM base AS final
 ENV FRONTEND_BUILD=/app/frontend
 
 COPY --from=buildbackend /Chatsper.Backend/main .
-COPY --from=buildfrontend /Chatsper.Frondend/build/ ./frontend
+COPY --from=buildfrontend /Chatsper.Frontend/build/ ./frontend
 
 CMD ["./main"]
