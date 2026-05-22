@@ -38,13 +38,14 @@ jobs:
       - uses: oven-sh/setup-bun@v2
 
       - run: cd ./Chatsper.Frontend && bun i && bun run build
+      - run: sudo apt install gcc-mingw-w64-x86-64 -y
       - name: Build
         env:
           FRONTEND_BUILD: ./ChatsperFrontend/build
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
         run: |
-          go build -o chatsper-${{ matrix.os }}${{ matrix.ext }} ./Chatsper.Backend/cmd/main.go
+          CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc CGO_CFLAGS="-pthread" go build -o chatsper-${{ matrix.os }}${{ matrix.ext }} ./Chatsper.Backend/cmd/main.go
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
