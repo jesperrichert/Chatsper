@@ -14,7 +14,7 @@ WORKDIR /Chatsper.Backend
 
 COPY /Chatsper.Backend/ .
 
-RUN apt update -y && apt install sudo && sudo apt install -y build-essential
+RUN apt update -y && apt install -y sudo && sudo apt install -y build-essential
 ENV CGO_ENABLED=1
 RUN go build ./cmd/main.go
 
