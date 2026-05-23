@@ -41,7 +41,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
 
       - run: cd ./Chatsper.Frontend/ && bun i && bun run build
-      - run: cd ./Chatsper.Backend/internal/api/router/ && rice embed-go
+      - run: cd ./Chatsper.Backend/internal/api/router/ && ../../../rice-${{ matrix.goos }}${{ matrix.ext }} embed-go
       - name: Build
         env:
           FRONTEND_BUILD: ../Chatsper.Frontend/build
