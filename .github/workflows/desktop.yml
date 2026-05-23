@@ -40,14 +40,14 @@ jobs:
           go-version: stable
       - uses: oven-sh/setup-bun@v2
 
-      - run: cd ./Chatsper.Frontend && bun i && bun run build
+      - run: cd ./Chatsper.Frontend/ && bun i && bun run build
       - name: Build
         env:
           FRONTEND_BUILD: ../Chatsper.Frontend/build
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
           CGO_ENABLED: 1
-        run: cd ./Chatsper.Backend && go build -o chatsper-${{ matrix.os }}${{ matrix.ext }} ./cmd/main.go
+        run: cd ./Chatsper.Backend/ && go build -o chatsper-${{ matrix.os }}${{ matrix.ext }} ./cmd/main.go
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
