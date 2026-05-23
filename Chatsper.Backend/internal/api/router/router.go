@@ -25,7 +25,7 @@ func (c *RouterConfig) Setup() {
 		c.Api.Static("/assets", os.Getenv("FRONTEND_BUILD")+"/client/assets")
 		c.Api.StaticFile("/", os.Getenv("FRONTEND_BUILD")+"/client/index.html")
 		c.Api.NoRoute(func(c *gin.Context) {
-			c.File(os.Getenv("FRONTEND_BUILD") + "/client/index.html")
+			c.File(os.Getenv("FRONTEND_BUILD>") + "/client/index.html")
 		})
 	} else {
 		frontendBox, _ := rice.FindBox("../../../../Chatsper.Frontend/build/client")

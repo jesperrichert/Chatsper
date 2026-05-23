@@ -7,6 +7,7 @@ import (
 	"github.com/pterm/pterm"
 	"zip.jespersen.chatsper/internal/config/application"
 	"zip.jespersen.chatsper/internal/config/file"
+	"zip.jespersen.chatsper/shared/generation"
 )
 
 func main() {
@@ -14,7 +15,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	api := application.NewGin()
 	database := application.NewDatabase(configuration.Database.Type, configuration.Database.ConnectionUrl)
 
@@ -30,6 +31,19 @@ func main() {
 	fmt.Println(pterm.Gray("---------------------------------------"))
 	fmt.Println(pterm.Green("API Endpoint: http://localhost:3000/api"))
 	fmt.Println(pterm.Green("API Dashboard: http://localhost:3000"))
+	fmt.Println(pterm.Green("Bot Twitch Account Auth Url: " + generation.GenerateTwitchAuthUrl(
+		configuration.TwitchPlatform.ApplicationId,
+		"http://localhost:3000/platform/twitch/auth/callback",
+		[]string{
+			"user:read:chat",
+			"user:write:chat",
+			"user:bot",
+			"channel:bot",
+			"channel:read:subscriptions",
+		},
+	),
+	),
+	)
 	fmt.Println(pterm.Gray("---------------------------------------\n"))
 
 	err = api.Run(":3000")

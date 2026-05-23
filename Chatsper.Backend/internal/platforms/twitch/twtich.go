@@ -4,6 +4,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"zip.jespersen.chatsper/internal/config/file"
+	twitch_auth "zip.jespersen.chatsper/internal/platforms/twitch/auth"
+	twitch_chat "zip.jespersen.chatsper/internal/platforms/twitch/chat"
+	twitch_client "zip.jespersen.chatsper/internal/platforms/twitch/client"
 	Log "zip.jespersen.chatsper/internal/utils"
 )
 
@@ -27,5 +30,13 @@ func NewTwitch(
 }
 
 func (t *Twitch) Init() error {
+
+	client := twitch_client.NewTwitchClient(t.Config)
+	auth := twitch_auth.NewTwitchAuth(t.Config, t.API, t.Database, client)
+	chat := twitch_chat.NewTwitchChat(t.Config, t.API, t.Database, client)
+
+	auth.Init()
+	chat.Init()
+
 	return nil
 }

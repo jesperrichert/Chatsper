@@ -1,16 +1,17 @@
 package file
 
 import (
-	"gopkg.in/yaml.v3"
 	"log"
 	"os"
+
+	"gopkg.in/yaml.v3"
 
 	"github.com/pterm/pterm"
 	Log "zip.jespersen.chatsper/internal/utils"
 	"zip.jespersen.chatsper/shared/database"
 )
 
-var Version = "1.0.1"
+var Version = "1.0.2"
 
 func LoadFromFile(file string) (*Config, error) {
 	Log.Info("Loading config from file: " + file)
@@ -21,9 +22,8 @@ func LoadFromFile(file string) (*Config, error) {
 
 		template := &Config{
 			TwitchPlatform: TwitchPlatform{
-				ApplicationID:     "",
+				ApplicationId:     "",
 				ApplicationSecret: "",
-				ApplicationUserId: "",
 			},
 			Database: Database{
 				Type:          database.SqliteDataBase,

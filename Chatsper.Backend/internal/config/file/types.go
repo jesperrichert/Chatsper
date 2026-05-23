@@ -11,8 +11,7 @@ type Config struct {
 }
 
 type TwitchPlatform struct {
-	ApplicationUserId string `yaml:"ApplicationUserId"`
-	ApplicationID     string `yaml:"ApplicationID"`
+	ApplicationId     string `yaml:"ApplicationId"`
 	ApplicationSecret string `yaml:"ApplicationSecret"`
 }
 

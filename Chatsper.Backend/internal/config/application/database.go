@@ -7,7 +7,7 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"zip.jespersen.chatsper/internal/models"
+	models "zip.jespersen.chatsper/internal/models/database"
 	Log "zip.jespersen.chatsper/internal/utils"
 	shared "zip.jespersen.chatsper/shared/database"
 )
@@ -46,7 +46,8 @@ func NewDatabase(dbType shared.DatabaseType, connectionStr string) *gorm.DB {
 func migrations(db *gorm.DB) {
 	Log.Message("Running migrations for Database...")
 	err := db.AutoMigrate(
-		&models.ExampleEntity{},
+		&models.UserEntity{},
+		&models.TwitchUserEntity{},
 	)
 	if err != nil {
 		Log.Error("Database Migrations failed to load for the current connection...", true)

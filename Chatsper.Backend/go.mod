@@ -68,4 +68,5 @@ require (
 	gorm.io/driver/postgres v1.6.0 // indirect
 	gorm.io/driver/sqlite v1.6.0 // indirect
 	gorm.io/gorm v1.31.1 // indirect
+	resty.dev/v3 v3.0.0-beta.6 // indirect
 )
