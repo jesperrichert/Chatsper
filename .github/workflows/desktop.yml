@@ -47,8 +47,7 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
           CGO_ENABLED: 1
-        run: |
-          cd ./Chatsper.Backend && go build -o chatsper-${{ matrix.os }}${{ matrix.ext }} ./cmd/main.go
+        run: cd ./Chatsper.Backend && go build -o chatsper-${{ matrix.os }}${{ matrix.ext }} ./cmd/main.go
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
