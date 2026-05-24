@@ -8,8 +8,8 @@ Chatsper is a Open Source and free to use Twitch Bot. It can be used as Self Hos
 
 ## Installation
 You can choose between two types! 
-- Use the native app on your Computer (Read More)
-- Use Docker to run the chatsper Docker image (Read More)
+- Use the native app on your Computer ([Read More](https://doc.jespersen.zip/s/chatspers/doc/native-app-U4Hk5aIJYd))
+- Use Docker to run the chatsper Docker image ([Read More](https://doc.jespersen.zip/s/chatspers/doc/docker-YS9gIev6JV))
 - Or use the Hosted Version at [@Chatsper](https://chatsper.jespersen.zip)
 
 ## Documentation 
