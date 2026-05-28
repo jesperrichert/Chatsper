@@ -31,19 +31,23 @@ func main() {
 	fmt.Println(pterm.Gray("---------------------------------------"))
 	fmt.Println(pterm.Green("API Endpoint: http://localhost:3000/api"))
 	fmt.Println(pterm.Green("API Dashboard: http://localhost:3000"))
-	fmt.Println(pterm.Green("Bot Twitch Account Auth Url: " + generation.GenerateTwitchAuthUrl(
-		configuration.TwitchPlatform.ApplicationId,
-		"http://localhost:3000/platform/twitch/auth/callback",
-		[]string{
-			"user:read:chat",
-			"user:write:chat",
-			"user:bot",
-			"channel:bot",
-			"channel:read:subscriptions",
-		},
-	),
-	),
-	)
+
+	if configuration.TwitchPlatform.BotAccountUserId == 0 {
+		fmt.Println(pterm.Red("You need to set a Bot User Id to tell Chatsper what account is the Bot to use."))
+		fmt.Println(pterm.Gray("Use this url to get the user id: " + generation.GenerateTwitchAuthUrl(
+			configuration.TwitchPlatform.ApplicationId,
+			configuration.TwitchPlatform.RedirectUrl,
+			[]string{
+				"user:read:chat",
+				"user:write:chat",
+				"user:bot",
+				"channel:bot",
+				"channel:read:subscriptions",
+			},
+			"botAuth",
+		)))
+	}
+
 	fmt.Println(pterm.Gray("---------------------------------------\n"))
 
 	err = api.Run(":3000")

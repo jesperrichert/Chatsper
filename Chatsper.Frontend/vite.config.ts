@@ -4,10 +4,4 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter()],
-  resolve: {
-    alias: {
-      'react-dom/server': 'react-dom/server.node',
-    },
-    tsconfigPaths: true,
-  },
 });

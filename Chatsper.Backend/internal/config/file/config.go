@@ -24,6 +24,7 @@ func LoadFromFile(file string) (*Config, error) {
 			TwitchPlatform: TwitchPlatform{
 				ApplicationId:     "",
 				ApplicationSecret: "",
+				RedirectUrl:       "http://localhost:3000/platform/twitch/auth/callback",
 			},
 			Database: Database{
 				Type:          database.SqliteDataBase,

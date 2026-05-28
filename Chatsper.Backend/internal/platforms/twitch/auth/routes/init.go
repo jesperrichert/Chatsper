@@ -12,7 +12,7 @@ type TwitchAPIRouteConfig struct {
 }
 
 type Routes struct {
-	Callback *Callback
+	Callback *TwitchAuthController
 }
 
 func Configure(api *gin.Engine, database *gorm.DB, client *twitch_client.TwitchClient) {
@@ -23,7 +23,7 @@ func Configure(api *gin.Engine, database *gorm.DB, client *twitch_client.TwitchC
 	}
 
 	routes := &Routes{
-		Callback: (*Callback)(config),
+		Callback: (*TwitchAuthController)(config),
 	}
 
 	platform := api.Group("/platform")

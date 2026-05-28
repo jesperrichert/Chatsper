@@ -1,0 +1,16 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="GoDfaErrorMayBeNotNil" enabled="true" level="WARNING" enabled_by_default="true">
+      <methods>
+        <method importPath="gorm.io/gorm" receiver="ChainInterface" name="First" />
+      </methods>
+    </inspection_tool>
+    <inspection_tool class="GoResourceLeak" enabled="true" level="WARNING" enabled_by_default="true">
+      <functions>
+        <function importPath="resty.dev" name="New" />
+        <function importPath="os" name="Create" />
+      </functions>
+    </inspection_tool>
+  </profile>
+</component>

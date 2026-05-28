@@ -14,9 +14,6 @@
     "jsx": "react-jsx",
     "rootDirs": [
       "./chatsper-frontend", "./.react-router/types"],
-    "paths": {
-      "~/*": ["./app/*"]
-    },
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,

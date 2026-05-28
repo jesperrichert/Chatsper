@@ -23,8 +23,6 @@ type Chatsper struct {
 func (app *Chatsper) Build() {
 
 	Log.Info("Adding Controller to API Server...")
-	// Controller
-	exampleController := controller.NewExampleController(app.Config, app.Database, app.Api)
 
 	// Platforms
 	twtich := twitch.NewTwitch(app.Config, app.Api, app.Database)
@@ -34,9 +32,13 @@ func (app *Chatsper) Build() {
 		os.Exit(0)
 	}
 
+	// Controller
+	exampleController := controller.NewExampleController(app.Config, app.Database, app.Api)
+	frontendController := controller.NewFrontendController(app.Config, app.Database, app.Api)
 	routeConfig := router.RouterConfig{
-		Api:             app.Api,
-		IndexController: exampleController,
+		Api:                app.Api,
+		IndexController:    exampleController,
+		FrontendController: frontendController,
 	}
 
 	Log.Info("Running Setup for API Router...")

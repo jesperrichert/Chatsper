@@ -21,7 +21,7 @@ func NewTwitchClient(
 	}
 }
 
-func (client *TwitchClient) User(bearer string, username string) (*models.TwtichAPIUserDataBaseResponse, error) {
+func (client *TwitchClient) User(bearer string) (*models.TwtichAPIUserDataBaseResponse, error) {
 	api := client.TwitchAPI.R()
 	api.SetResult(&models.TwtichAPIUserDataBaseResponse{})
 
@@ -29,7 +29,7 @@ func (client *TwitchClient) User(bearer string, username string) (*models.Twtich
 	api.Header.Add("Client-Id", client.ChatsperConfig.TwitchPlatform.ApplicationId)
 	api.Header.Add("Content-Type", "application/json")
 
-	req, err := api.Get(static.TwitchBaseAPIUrl + "/users?login=" + username)
+	req, err := api.Get(static.TwitchBaseAPIUrl + "/users") // ?login=" + username
 	if err != nil {
 		return nil, err
 	}

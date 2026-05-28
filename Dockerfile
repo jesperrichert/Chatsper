@@ -1,13 +1,13 @@
 FROM debian:trixie-slim AS base
 WORKDIR /app
 
-FROM oven/bun:1 AS buildfrontend
+FROM node:24-trixie-slim AS buildfrontend
 WORKDIR /Chatsper.Frontend
 
 COPY /Chatsper.Frontend/ .
 
-RUN bun install
-RUN bun run build
+RUN npm install
+RUN npm run build
 
 FROM golang:tip-trixie AS buildbackend
 WORKDIR /Chatsper.Backend

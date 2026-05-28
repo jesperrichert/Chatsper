@@ -11,8 +11,10 @@ type Config struct {
 }
 
 type TwitchPlatform struct {
+	BotAccountUserId  uint   `yaml:"BotAccountUserId"`
 	ApplicationId     string `yaml:"ApplicationId"`
 	ApplicationSecret string `yaml:"ApplicationSecret"`
+	RedirectUrl       string `yaml:"RedirectUrl"`
 }
 
 type Database struct {

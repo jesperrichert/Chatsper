@@ -10,8 +10,9 @@ import (
 )
 
 type RouterConfig struct {
-	Api             *gin.Engine
-	IndexController *controller.IndexController
+	Api                *gin.Engine
+	IndexController    *controller.IndexController
+	FrontendController *controller.FrontendController
 }
 
 func (c *RouterConfig) Setup() {
@@ -33,17 +34,21 @@ func (c *RouterConfig) Setup() {
 		assets := assetsBox.HTTPBox()
 		indexPage, _ := frontendBox.String("index.html")
 
-		// Dashboard
 		c.Api.StaticFS("/assets", assets)
 		c.Api.GET("/", func(ctx *gin.Context) {
 			ctx.Writer.WriteHeader(http.StatusOK)
-			ctx.Writer.Write([]byte(indexPage))
+			_, err := ctx.Writer.Write([]byte(indexPage))
+			if err != nil {
+				return
+			}
 		})
 		c.Api.NoRoute(func(c *gin.Context) {
 			c.Writer.WriteHeader(http.StatusOK)
-			c.Writer.Write([]byte(indexPage))
+			_, err := c.Writer.Write([]byte(indexPage))
+			if err != nil {
+				return
+			}
 		})
-
 	}
 
 	// API
@@ -58,6 +63,7 @@ func (c *RouterConfig) Setup() {
 				},
 			})
 		})
+		api.GET("/frontend", c.FrontendController.Get)
 		// v1
 		v1 := api.Group("/v1")
 		{

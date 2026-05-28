@@ -1,13 +1,17 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import {LoginForm} from "../components/custom/login/login-form";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Chatsper Auth" },
+    { name: "description", content: "Welcome to Chatsper Platform!" },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  return  <div className="flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
+    <div className="w-full max-w-sm md:max-w-4xl">
+      <LoginForm />
+    </div>
+  </div>;
 }
