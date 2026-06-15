@@ -1,7 +1,7 @@
 # Chatsper
 [![CodeFactor](https://www.codefactor.io/repository/github/jesperrichert/chatsper/badge)](https://www.codefactor.io/repository/github/jesperrichert/chatsper) 
 ![GitHub Release](https://img.shields.io/github/v/release/jesperrichert/Chatsper)
-[![Discord](https://img.shields.io/discord/1507905500371615745)](https://discord.gg/tbhzEfh5fa)
+[![Discord](https://img.shields.io/discord/1495029281959575703)](https://discord.gg/5Kjwtz3NFV)
 
 ___
 Chatsper is a Open Source and free to use Twitch Bot. It can be used as Self Hosted version on a VPS or your own PC. Or you use the Hosted Version at [@Chatsper](https://chatsper.jespersen.zip)...
