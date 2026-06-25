@@ -1,0 +1,4 @@
+name: Main
+variables:
+  - name: SESSION_ID
+    value: "{{process.env.SESSION_ID}}"

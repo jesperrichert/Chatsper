@@ -1,0 +1,24 @@
+info:
+  name: Session
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://localhost:3000/api/auth/session
+  headers:
+    - name: Authorization
+      value: "{{SESSION_ID}}"
+  body:
+    type: json
+    data: |-
+      {
+        "session_id": "{{SESSION_ID}}"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
