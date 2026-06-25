@@ -48,6 +48,7 @@ func migrations(db *gorm.DB) {
 	err := db.AutoMigrate(
 		&models.UserEntity{},
 		&models.TwitchUserEntity{},
+		&models.UserAPI{},
 	)
 	if err != nil {
 		Log.Error("Database Migrations failed to load for the current connection...", true)

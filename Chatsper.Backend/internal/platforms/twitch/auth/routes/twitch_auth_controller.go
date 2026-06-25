@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/pterm/pterm"
 	"gorm.io/gorm"
 	models "zip.jespersen.chatsper/internal/models/database"
@@ -25,6 +26,8 @@ func (config *TwitchAuthController) authCallback(ctx *gin.Context) {
 		return
 	}
 
+	var sessionId = uuid.New()
+
 	userModel := models.UserEntity{
 		Username:          user.Data[0].Login,
 		Email:             user.Data[0].Email,
@@ -35,16 +38,20 @@ func (config *TwitchAuthController) authCallback(ctx *gin.Context) {
 			Username:     user.Data[0].Login,
 			AccessToken:  token.AccessToken,
 			Scopes:       token.Scope,
-			TwitchUserId: user.Data[0].Id,
+			TwitchUserID: user.Data[0].Id,
 			RefreshToken: token.RefreshToken,
+		},
+		UserAPI: &models.UserAPI{
+			SessionID: sessionId,
 		},
 	}
 
 	ctxB := context.Background()
 	twitchUser, err := gorm.G[models.TwitchUserEntity](config.Database).Where("twitch_user_id = ?", user.Data[0].Id).Preload("User", nil).First(ctxB)
-	if twitchUser.TwitchUserId != user.Data[0].Id {
+	if twitchUser.TwitchUserID != user.Data[0].Id {
 		config.Database.Create(&userModel)
-		_, err = gorm.G[models.TwitchUserEntity](config.Database).Where("twitch_user_id = ?", userModel.TwitchUser.TwitchUserId).Update(ctxB, "user_id", userModel.ID)
+		_, err = gorm.G[models.TwitchUserEntity](config.Database).Where("twitch_user_id = ?", userModel.TwitchUser.TwitchUserID).Update(ctxB, "user_id", userModel.ID)
+		_, err = gorm.G[models.UserAPI](config.Database).Where("session_id = ?", sessionId).Update(ctxB, "user_id", userModel.ID)
 	} else {
 		config.Database.Model(&twitchUser).Updates(
 			models.UserEntity{
@@ -57,12 +64,17 @@ func (config *TwitchAuthController) authCallback(ctx *gin.Context) {
 					Scopes:       token.Scope,
 					RefreshToken: token.RefreshToken,
 				},
+				UserAPI: &models.UserAPI{
+					SessionID: sessionId,
+				},
 			},
 		)
 		if err != nil {
 			return
 		}
 	}
+	_, err = gorm.G[models.UserAPI](config.Database).Where("user_id = ?", twitchUser.UserID).Update(ctxB, "session_id", sessionId)
+
 	if state == "botAuth" {
 		fmt.Println()
 		fmt.Println(pterm.Yellow("Bot Authentication Successful... You have authenticated a Bot with Chataper."))
@@ -71,5 +83,6 @@ func (config *TwitchAuthController) authCallback(ctx *gin.Context) {
 		fmt.Println()
 	}
 
-	ctx.Redirect(http.StatusPermanentRedirect, "/")
+	ctx.SetCookie("session", sessionId.String(), 30, "/", ctx.Request.Header.Get("Origin"), false, false)
+	ctx.Redirect(http.StatusPermanentRedirect, "/dashboard/overview")
 }

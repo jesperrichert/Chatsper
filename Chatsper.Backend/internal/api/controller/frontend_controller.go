@@ -29,6 +29,9 @@ func NewFrontendController(
 func (controller *FrontendController) Get(ctx *gin.Context) {
 	ctx.JSON(200, gin.H{
 		"version": static.Version,
+		"auth": gin.H{
+			"validate_url": "/api/auth/session",
+		},
 		"twitch": gin.H{
 			"auth_url": generation.GenerateTwitchAuthUrl(controller.Config.TwitchPlatform.ApplicationId, controller.Config.TwitchPlatform.RedirectUrl, []string{"user:read:email"}, ""),
 		},

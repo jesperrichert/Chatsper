@@ -1,5 +1,5 @@
 import type { Route } from "./+types/home";
-import React from "react";
+import React, { useEffect } from "react";
 
 export function meta({}: Route.MetaArgs) {
     return [
@@ -9,6 +9,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
+
+
     return <div>
         <main>
             {children}

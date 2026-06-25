@@ -6,7 +6,7 @@ import (
 	"resty.dev/v3"
 	"zip.jespersen.chatsper/internal/config/file"
 	models "zip.jespersen.chatsper/internal/models/http/twitch"
-	twitch_chat_routes "zip.jespersen.chatsper/internal/platforms/twitch/chat/routes"
+	"zip.jespersen.chatsper/internal/platforms/twitch/chat/routes"
 	twitch_client "zip.jespersen.chatsper/internal/platforms/twitch/client"
 	"zip.jespersen.chatsper/shared/static"
 )

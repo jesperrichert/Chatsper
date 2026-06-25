@@ -35,10 +35,12 @@ func (app *Chatsper) Build() {
 	// Controller
 	exampleController := controller.NewExampleController(app.Config, app.Database, app.Api)
 	frontendController := controller.NewFrontendController(app.Config, app.Database, app.Api)
+	authController := controller.NewAuthController(app.Config, app.Database, app.Api)
 	routeConfig := router.RouterConfig{
 		Api:                app.Api,
 		IndexController:    exampleController,
 		FrontendController: frontendController,
+		AuthController:     authController,
 	}
 
 	Log.Info("Running Setup for API Router...")

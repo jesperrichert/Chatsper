@@ -13,6 +13,7 @@ type RouterConfig struct {
 	Api                *gin.Engine
 	IndexController    *controller.IndexController
 	FrontendController *controller.FrontendController
+	AuthController     *controller.AuthController
 }
 
 func (c *RouterConfig) Setup() {
@@ -63,6 +64,11 @@ func (c *RouterConfig) Setup() {
 				},
 			})
 		})
+		auth := api.Group("/auth")
+		{
+			auth.POST("/session", c.AuthController.Post)
+		}
+
 		api.GET("/frontend", c.FrontendController.Get)
 		// v1
 		v1 := api.Group("/v1")

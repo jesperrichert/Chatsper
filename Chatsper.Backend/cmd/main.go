@@ -30,7 +30,7 @@ func main() {
 	fmt.Println(pterm.Blue("\nChatsper Application is up and running!"))
 	fmt.Println(pterm.Gray("---------------------------------------"))
 	fmt.Println(pterm.Green("API Endpoint: http://localhost:3000/api"))
-	fmt.Println(pterm.Green("API Dashboard: http://localhost:3000"))
+	fmt.Println(pterm.Green("Chatsper-Platform: http://localhost:3000"))
 
 	if configuration.TwitchPlatform.BotAccountUserId == 0 {
 		fmt.Println(pterm.Red("You need to set a Bot User Id to tell Chatsper what account is the Bot to use."))

@@ -6,6 +6,8 @@ import {Button} from "../../ui/button";
 import {useEffect, useState} from "react";
 import type {FrontendConfig} from "../../../types/frontend";
 import {fetchConfig} from "../../../lib/config/api";
+import { Session } from "../../../lib/auth/session";
+import Cookies from 'js-cookie'
 
 export function LoginForm({
   className,
@@ -17,7 +19,15 @@ export function LoginForm({
   useEffect(() => {
     if (config != null) return
     async function data() {
-      setConfig(await fetchConfig())
+      const conf = await fetchConfig()
+      setConfig(conf)
+      
+      if (await Session.validate(
+        conf.auth.validate_url,
+        Cookies.get("session") as string
+      )) {
+        window.open("/dashboard/overview", "_self")
+      } else return
     }
     data()
   }, [config])
