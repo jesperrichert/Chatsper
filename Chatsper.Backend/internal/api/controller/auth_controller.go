@@ -64,5 +64,4 @@ func (controller *AuthController) Post(ctx *gin.Context) {
 		"authenticated": false,
 		"error":         "Invalid Session ID",
 	})
-	return
 }

@@ -11,7 +11,7 @@ import (
 	"zip.jespersen.chatsper/internal/api/router"
 	"zip.jespersen.chatsper/internal/config/file"
 	"zip.jespersen.chatsper/internal/platforms/twitch"
-	Log "zip.jespersen.chatsper/internal/utils"
+	Log "zip.jespersen.chatsper/internal/utils/log"
 )
 
 type Chatsper struct {

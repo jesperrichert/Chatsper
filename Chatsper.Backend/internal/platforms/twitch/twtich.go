@@ -5,9 +5,9 @@ import (
 	"gorm.io/gorm"
 	"zip.jespersen.chatsper/internal/config/file"
 	twitch_auth "zip.jespersen.chatsper/internal/platforms/twitch/auth"
-	"zip.jespersen.chatsper/internal/platforms/twitch/chat"
+	twitch_chat "zip.jespersen.chatsper/internal/platforms/twitch/chat"
 	twitch_client "zip.jespersen.chatsper/internal/platforms/twitch/client"
-	Log "zip.jespersen.chatsper/internal/utils"
+	Log "zip.jespersen.chatsper/internal/utils/log"
 )
 
 type Twitch struct {

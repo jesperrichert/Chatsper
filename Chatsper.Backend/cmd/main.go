@@ -5,12 +5,15 @@ import (
 	"log"
 
 	"github.com/pterm/pterm"
+	"zip.jespersen.chatsper/internal/config"
 	"zip.jespersen.chatsper/internal/config/application"
 	"zip.jespersen.chatsper/internal/config/file"
 	"zip.jespersen.chatsper/shared/generation"
 )
 
 func main() {
+	config.Setup()
+
 	configuration, err := file.LoadFromFile("./config.yml")
 	if err != nil {
 		log.Fatal(err)
