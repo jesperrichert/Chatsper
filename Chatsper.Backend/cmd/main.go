@@ -8,15 +8,19 @@ import (
 	"zip.jespersen.chatsper/internal/config"
 	"zip.jespersen.chatsper/internal/config/application"
 	"zip.jespersen.chatsper/internal/config/file"
+	"zip.jespersen.chatsper/internal/utils"
 	"zip.jespersen.chatsper/shared/generation"
 )
 
 func main() {
 	config.Setup()
 
-	configuration, err := file.LoadFromFile("./config.yml")
+	configuration, err := file.LoadFromFile("./config.yml", true)
 	if err != nil {
 		log.Fatal(err)
+	}
+	if !configuration.DisableAutoUpdate {
+		config.Updater()
 	}
 
 	api := application.NewGin()
@@ -31,6 +35,7 @@ func main() {
 	chatsper.Build()
 
 	fmt.Println(pterm.Blue("\nChatsper Application is up and running!"))
+	fmt.Println(pterm.Gray("v." + utils.Version() + ""))
 	fmt.Println(pterm.Gray("---------------------------------------"))
 	fmt.Println(pterm.Green("API Endpoint: http://localhost:3000/api"))
 	fmt.Println(pterm.Green("Chatsper-Platform: http://localhost:3000"))

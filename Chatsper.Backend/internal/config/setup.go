@@ -28,7 +28,7 @@ func Setup() {
 
 		if text == "TWITCH" {
 			fmt.Println(pterm.LightGreen("Please enter your Twitch-Application-Client-ID"))
-			fmt.Println(pterm.Gray("How to: https://doc.jespersen.zip/s/chatspers/doc/get-twtich-application-client-id-B2zM9vCnHb"))
+			fmt.Println(pterm.Gray("How to: https://doc.jespersen.zip/s/chatspers/doc/get-twitch-application-client-id-B2zM9vCnHb"))
 			fmt.Print("> ")
 			text = readString()
 
@@ -40,7 +40,7 @@ func Setup() {
 			}
 
 			fmt.Println(pterm.LightGreen("Please enter your Twitch-Application-Client-Secret"))
-			fmt.Println(pterm.Gray("How to: https://doc.jespersen.zip/s/chatspers/doc/get-twtich-application-client-secret-lwmc7GJaKE"))
+			fmt.Println(pterm.Gray("How to: https://doc.jespersen.zip/s/chatspers/doc/get-twitch-application-client-secret-lwmc7GJaKE"))
 			fmt.Print("> ")
 			text = readString()
 

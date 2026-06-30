@@ -22,13 +22,14 @@ var ConfigTemplate = &Config{
 		Type:          database.SqliteDataBase,
 		ConnectionUrl: "postgres://postgres:postgres@localhost:5432/postgres",
 	},
-	Version: static.ConfigVersion,
+	Version:           static.ConfigVersion,
+	DisableAutoUpdate: false,
 }
 
-func LoadFromFile(file string) (*Config, error) {
+func LoadFromFile(file string, loadWhenNotExsits bool) (*Config, error) {
 	Log.Info("Loading config from file: " + file)
 	data, err := os.ReadFile(file)
-	if err != nil {
+	if err != nil && loadWhenNotExsits {
 		Log.Error("No Config found for Chatsper... Please open config.yml and configure your Chatsper.", false)
 		Log.Debug("Then Restart the Bot...")
 

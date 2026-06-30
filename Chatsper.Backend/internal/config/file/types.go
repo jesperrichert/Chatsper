@@ -5,9 +5,10 @@ import (
 )
 
 type Config struct {
-	TwitchPlatform TwitchPlatform `yaml:"TwitchPlatform"`
-	Database       Database       `yaml:"Database"`
-	Version        string         `yaml:"CONFIG_VERSION"`
+	TwitchPlatform    TwitchPlatform `yaml:"TwitchPlatform"`
+	Database          Database       `yaml:"Database"`
+	Version           string         `yaml:"CONFIG_VERSION"`
+	DisableAutoUpdate bool           `yaml:"DisableAutoUpdate"`
 }
 
 type TwitchPlatform struct {
