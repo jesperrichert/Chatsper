@@ -10,6 +10,7 @@ import (
 	"zip.jespersen.chatsper/internal/config/file"
 	"zip.jespersen.chatsper/internal/utils"
 	"zip.jespersen.chatsper/shared/generation"
+	"zip.jespersen.chatsper/shared/static"
 )
 
 func main() {
@@ -35,7 +36,7 @@ func main() {
 	chatsper.Build()
 
 	fmt.Println(pterm.Blue("\nChatsper Application is up and running!"))
-	fmt.Println(pterm.Gray("v." + utils.Version() + ""))
+	fmt.Println(pterm.Gray("v." + static.Version + " - Latest " + utils.Version()))
 	fmt.Println(pterm.Gray("---------------------------------------"))
 	fmt.Println(pterm.Green("API Endpoint: http://localhost:3000/api"))
 	fmt.Println(pterm.Green("Chatsper-Platform: http://localhost:3000"))

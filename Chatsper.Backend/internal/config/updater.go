@@ -1,7 +1,6 @@
 package config
 
 import (
-	"archive/zip"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -106,7 +105,7 @@ func runUpdate(release GitHubRelease) {
 	user, _ := user.Current()
 	version := utils.Version()
 	chatsperDocumentPath := user.HomeDir + "/Dokumente/Chatsper/" + version
-	os.MkdirAll(chatsperDocumentPath, os.ModeDir)
+	os.MkdirAll(chatsperDocumentPath, os.FileMode(0777))
 
 	fmt.Println("Download the latest Chatsper Release!")
 	req, err := http.Get(downloadUrl)
@@ -117,32 +116,11 @@ func runUpdate(release GitHubRelease) {
 	defer req.Body.Close()
 
 	bytes, _ := io.ReadAll(req.Body)
-	releaseZip := chatsperDocumentPath + "/chatsper.zip"
+	releaseFile := chatsperDocumentPath + "/chatsper"
 
-	os.WriteFile(releaseZip, bytes, os.FileMode(0777))
+	os.WriteFile(releaseFile, bytes, os.FileMode(0777))
 	fmt.Println("Downloaded successfuly to " + chatsperDocumentPath)
-
-	archive, err := zip.OpenReader(releaseZip)
-	if err != nil {
-		static.ContactTheTeam()
-		os.Exit(0)
-	}
-	defer archive.Close()
-
-	for id := range archive.File {
-		file := archive.File[id]
-
-		reader, err := file.Open()
-		if err != nil {
-			static.ContactTheTeam()
-			os.Exit(0)
-		}
-		zipFileData, _ := io.ReadAll(reader)
-		defer reader.Close()
-
-		os.WriteFile(chatsperDocumentPath+"/"+file.Name, zipFileData, os.FileMode(0777))
-		os.Remove(releaseZip)
-	}
+	os.Exit(0)
 }
 
 func Updater() {
