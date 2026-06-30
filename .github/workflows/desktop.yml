@@ -3,8 +3,8 @@ name: Build Chatsper for Desktop
 on:
   workflow_dispatch:
   push:
-    tags: 
-      - v.*
+    tags:
+      - '*'
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -64,11 +64,12 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v3
         with:
-          
           tag_name: ${{ github.ref_name }}
           token: ${{ github.token }}
           target_commitish: ${{ github.sha }}
           generate_release_notes: true
-          name: "Automated Release for Chatsper (Linux, Win, MacOS)"
+          name: "Automated Release for Chatsper (${{ github.ref_name }})"
           prerelease: false
           body: "This Release is currently only for the Chatsper-Updater! It is intendet to released. But has currently no detailed Release notes. (Currently it only release the artifects from the Action run.)"
+          files: |
+            chatsper-${{ matrix.os }}
