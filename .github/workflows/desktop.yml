@@ -72,4 +72,4 @@ jobs:
           prerelease: false
           body: "This Release is currently only for the Chatsper-Updater! It is intendet to released. But has currently no detailed Release notes. (Currently it only release the artifects from the Action run.)"
           files: |
-            chatsper-${{ matrix.os }}
+            Chatsper.Backend/chatsper-${{ matrix.os }}${{ matrix.ext }}
