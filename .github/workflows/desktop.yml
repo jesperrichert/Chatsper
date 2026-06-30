@@ -10,6 +10,10 @@ env:
 
 jobs:
   build:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
     name: "Build for ${{ matrix.os }}"
     runs-on: ${{ matrix.runson }}
     strategy:
@@ -59,7 +63,9 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v3
         with:
+          
           tag_name: ${{ github.ref_name }}
+          token: ${{ github.token }}
           target_commitish: ${{ github.sha }}
           generate_release_notes: true
           name: "Automated Release for Chatsper (Linux, Win, MacOS)"
