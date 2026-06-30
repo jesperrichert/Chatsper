@@ -1,4 +1,5 @@
 name: Build Chatsper for Desktop
+
 on:
   workflow_dispatch:
   push:
@@ -69,5 +70,5 @@ jobs:
           target_commitish: ${{ github.sha }}
           generate_release_notes: true
           name: "Automated Release for Chatsper (Linux, Win, MacOS)"
-          prerelease: true
+          prerelease: false
           body: "This Release is currently only for the Chatsper-Updater! It is intendet to released. But has currently no detailed Release notes. (Currently it only release the artifects from the Action run.)"
