@@ -21,6 +21,7 @@ body {
 }
 
 @theme inline {
+  --color-bg-base: #0C0D0C;
   --color-text-gray: #424549;
   --color-bg-gray: #1e2124;
   --color-bg-accent: #36393e;

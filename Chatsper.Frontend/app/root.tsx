@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { FrontendConfigProvider } from "./context/frontend-config";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -34,10 +35,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
         <title>Chatsper Platform</title>
       </head>
-      <body style={{
-        backgroundColor: "#0C0D0C"
-      }} className={"h-screen w-screen"}>
-      {children}
+      <body 
+        style={{
+          backgroundColor: "#0C0D0C"
+        }}
+        className={"h-screen w-screen"}
+       >
+        <FrontendConfigProvider>
+        {children}
+        </FrontendConfigProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -51,7 +57,7 @@ export default function App() {
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   return (
-    <div className="min-h-screen flex justify-center items-center bg-[#0C0D0C]">
+    <div className="min-h-screen flex justify-center items-center bg-bg-base">
       <img
           className={"z-1 relative rounded-full shadow border-20"}
           width={1225}

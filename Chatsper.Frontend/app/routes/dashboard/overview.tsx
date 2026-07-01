@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import type { Route } from "./+types/home";
 import { fetchConfig } from "../../lib/config/api";
 import type { FrontendConfig } from "../../types/frontend";
 import { Session } from "../../lib/auth/session";
 import Cookies from 'js-cookie'
 
-export function meta({}: Route.MetaArgs) {
+export function meta() {
     return [
         { title: "Overview - Chatsper Platform" }, ,
     ];
 }
 
-export default function Home() {
+export default function Overview() {
    const [loggedIn, setLoggedIn] = useState<boolean>(false)
 
   useEffect(() => {

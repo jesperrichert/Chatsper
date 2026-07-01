@@ -6,7 +6,7 @@ import (
 	"github.com/pterm/pterm"
 )
 
-const Version = "0.1.7"
+const Version = "0.1.8"
 const ConfigVersion = "1.0.3"
 const TwitchBaseAPIUrl = "https://api.twitch.tv/helix"
 
