@@ -1,3 +1,6 @@
+> [!WARNING]
+> Chatsper ist currently in Development.
+
 # Chatsper
 [![CodeFactor](https://www.codefactor.io/repository/github/jesperrichert/chatsper/badge)](https://www.codefactor.io/repository/github/jesperrichert/chatsper) 
 ![GitHub Release](https://img.shields.io/github/v/release/jesperrichert/Chatsper)
